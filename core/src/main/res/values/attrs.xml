@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ChangeColorIconWithText">
+        <attr name="myicon" format="reference"/>
+        <attr name="mycolor" format="color"/>
+        <attr name="text" format="string"/>
+        <attr name="text_size" format="dimension"/>
+    </declare-styleable>
+
+</resources>

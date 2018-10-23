@@ -13,6 +13,8 @@ import com.chs.core.app.IUserChecker;
 import com.chs.core.base.BaseActivity;
 import com.chs.core.utils.WishPreference;
 import com.chs.wish.R;
+import com.chs.wish.main.HomeActivity;
+import com.chs.wish.user.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -69,11 +71,13 @@ public class GuideActivity extends BaseActivity implements OnItemClickListener {
                 @Override
                 public void onSignIn() {
                   showToast("登陆");
+                    startActivity(HomeActivity.class);
                 }
 
                 @Override
                 public void onNotSignIn() {
                  showToast("没登陆");
+                    startActivity(LoginActivity.class);
                 }
             });
         }
