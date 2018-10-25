@@ -13,35 +13,47 @@
         android:layout_weight="1"
         />
     <LinearLayout
+        android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="#F2F2F2"
+        android:orientation="horizontal" >
 
-            <com.chs.core.widget.ChangeColorIconWithText
-                android:id="@+id/id_indicator_one"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="6dp"
-                hyman:mycolor="@color/black"
-                hyman:myicon="@mipmap/main_home_selected"
-                hyman:text="@string/main_home_text"
-                hyman:text_size="12sp"/>
-         <ImageView
+        <TextView
+            android:id="@+id/tv_main"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            />
+            android:drawableTop="@drawable/tab_item_main_img_selector"
+            android:drawablePadding="@dimen/main_tab_item_image_and_text"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/main_home_text"
+            android:textColor="@drawable/tabitem_txt_sel" />
 
-            <com.chs.core.widget.ChangeColorIconWithText
-                android:id="@+id/id_indicator_two"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:padding="6dp"
-                hyman:mycolor="@color/black"
-                hyman:myicon="@mipmap/main_mine_un_select"
-                hyman:text="@string/main_mine_text"
-                hyman:text_size="12sp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/tab_item_message_img_selector"
+            android:drawablePadding="@dimen/main_tab_item_image_and_text"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/main_mine_text"
+            android:textColor="@drawable/tabitem_txt_sel" />
 
     </LinearLayout>
+
 </LinearLayout>

@@ -25,6 +25,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void init(@Nullable Bundle savedInstanceState) {
-//https://github.com/ccWenTian/notes
+//https://blog.csdn.net/lowprofile_coding/article/details/48298819
     }
 }
