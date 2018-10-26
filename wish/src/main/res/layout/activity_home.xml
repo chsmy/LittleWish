@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     >
     <FrameLayout
         android:id="@+id/container"
@@ -15,15 +17,15 @@
     <LinearLayout
         android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:background="#F2F2F2"
-        android:orientation="horizontal" >
+        android:layout_height="56dp"
+        android:background="#F8F8F8"
+        android:orientation="horizontal"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        >
 
-        <TextView
-            android:id="@+id/tv_main"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -35,19 +37,32 @@
             android:text="@string/main_home_text"
             android:textColor="@drawable/tabitem_txt_sel" />
 
-
-        <View
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            >
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/main_add"
+                android:text="@string/main_center_text"
+                android:layout_gravity="center|bottom"
+                android:gravity="center"
+                android:layout_marginTop="-40dp"
+                />
+        </FrameLayout>
 
-        <TextView
-            android:id="@+id/tv_message"
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_mine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:drawableTop="@drawable/tab_item_message_img_selector"
+            android:drawableTop="@drawable/tab_item_mine_img_selector"
             android:drawablePadding="@dimen/main_tab_item_image_and_text"
             android:focusable="true"
             android:gravity="center"

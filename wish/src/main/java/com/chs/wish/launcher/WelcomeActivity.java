@@ -9,6 +9,7 @@ import com.chs.core.app.IUserChecker;
 import com.chs.core.base.BaseActivity;
 import com.chs.core.timer.BaseTimerTask;
 import com.chs.core.timer.ITimerListener;
+import com.chs.core.utils.StatusBarUtil;
 import com.chs.core.utils.WishPreference;
 import com.chs.wish.R;
 import com.chs.wish.R2;
@@ -48,6 +49,7 @@ public class WelcomeActivity extends BaseActivity implements ITimerListener {
 
     @Override
     protected void init(@Nullable Bundle savedInstanceState) {
+        StatusBarUtil.setTransparent(this);
         mTimer = new Timer();
         final BaseTimerTask task = new BaseTimerTask(this);
         mTimer.schedule(task, 0, 1000);

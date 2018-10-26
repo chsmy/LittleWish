@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.chs.core.R;
 import com.chs.core.utils.StatusBarUtil;
 
 import butterknife.ButterKnife;
@@ -39,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             throw new ClassCastException("type of setLayout() must be int or View!");
         }
-        StatusBarUtil.setTranslucent(this, 60);
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.title_bg));
         mUnbinder = ButterKnife.bind(this);
         init(savedInstanceState);
     }
