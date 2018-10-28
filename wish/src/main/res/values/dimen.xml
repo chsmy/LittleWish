@@ -6,4 +6,7 @@
     
     <dimen name="main_tab_item_image_and_text">3dp</dimen>
 
+    <dimen name="dp12">12dp</dimen>
+    <dimen name="dp20">20dp</dimen>
+
 </resources>

@@ -4,4 +4,9 @@
     <string name="main_home_text">首页</string>
     <string name="main_mine_text">我的</string>
     <string name="main_center_text">发布</string>
+
+    //login
+    <string name="login_text">立即登录</string>
+    <string name="login_name">邮箱/手机号</string>
+    <string name="login_password">密码</string>
 </resources>
