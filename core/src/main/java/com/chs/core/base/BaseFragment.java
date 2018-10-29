@@ -1,5 +1,6 @@
 package com.chs.core.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,10 +22,21 @@ public abstract class BaseFragment extends Fragment {
     private Unbinder mUnbinder = null;
     private boolean isFragmentVisible;
     private boolean isFirstVisible;
+    private Context mContext;
 
     protected abstract Object setLayoutId();
 
     protected abstract void initView(View view, Bundle savedInstanceState);
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    public Context getActivityContext() {
+        return mContext;
+    }
 
     @Nullable
     @Override
@@ -46,7 +58,7 @@ public abstract class BaseFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isFirstVisible && isVisibleToUser) {
-            onFragmentFirstVisible();
+            onFirstVisible();
             isFirstVisible = false;
         }
         if (isVisibleToUser) {
@@ -74,7 +86,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 在fragment首次可见时回调，可用于加载数据，防止每次进入都重复加载数据
      */
-    protected void onFragmentFirstVisible() {
+    protected void onFirstVisible() {
 
     }
 
