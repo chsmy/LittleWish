@@ -27,5 +27,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     api project(':core')
 }

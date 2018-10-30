@@ -17,8 +17,11 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
         jcenter()
+        //BaseRecyclerViewAdapterHelper
+        maven { url "https://jitpack.io" }
     }
 }
 
