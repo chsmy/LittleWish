@@ -1,4 +1,4 @@
-package com.chs.core.recycler;
+package com.chs.wish.ui;
 
 import android.view.View;
 

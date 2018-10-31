@@ -1,4 +1,4 @@
-package com.chs.wish.main;
+package com.chs.wish.main.home;
 
 import android.os.Bundle;
 import android.view.View;

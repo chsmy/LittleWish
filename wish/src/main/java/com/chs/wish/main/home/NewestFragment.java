@@ -1,9 +1,8 @@
-package com.chs.wish.main;
+package com.chs.wish.main.home;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -25,6 +24,7 @@ public class NewestFragment extends BaseFragment {
     RecyclerView mRecyclerView = null;
     @BindView(R2.id.srl_index)
     SwipeRefreshLayout mRefreshLayout = null;
+    private RefreshHandler mRefreshHandler = null;
 
     public static NewestFragment newInstance(){
         return new NewestFragment();
@@ -45,6 +45,7 @@ public class NewestFragment extends BaseFragment {
         super.onFirstVisible();
         initRefreshLayout();
         initRecyclerView();
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView);
     }
 
     private void initRecyclerView() {

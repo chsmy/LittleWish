@@ -14,7 +14,7 @@ import com.chs.core.base.BaseActivity;
 import com.chs.core.utils.StatusBarUtil;
 import com.chs.core.utils.WishPreference;
 import com.chs.wish.R;
-import com.chs.wish.main.HomeActivity;
+import com.chs.wish.main.home.HomeActivity;
 import com.chs.wish.user.LoginActivity;
 
 import java.util.ArrayList;

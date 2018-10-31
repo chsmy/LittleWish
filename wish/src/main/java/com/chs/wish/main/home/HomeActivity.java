@@ -1,4 +1,4 @@
-package com.chs.wish.main;
+package com.chs.wish.main.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +11,7 @@ import com.chs.core.base.BaseActivity;
 import com.chs.core.base.BaseFragment;
 import com.chs.wish.R;
 import com.chs.wish.R2;
+import com.chs.wish.main.MineFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,7 +12,7 @@
 
     <activity android:name=".launcher.GuideActivity"/>
     <activity android:name=".user.LoginActivity"/>
-    <activity android:name=".main.HomeActivity"/>
+    <activity android:name=".main.home.HomeActivity"/>
 
 </application>
 

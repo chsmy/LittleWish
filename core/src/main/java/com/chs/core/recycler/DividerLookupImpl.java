@@ -1,7 +1,7 @@
 package com.chs.core.recycler;
 
 /**
- * Created by 傅令杰
+ *
  */
 
 public class DividerLookupImpl implements DividerItemDecoration.DividerLookup {
