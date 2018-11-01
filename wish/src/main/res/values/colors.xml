@@ -5,6 +5,7 @@
     <color name="colorAccent">#ffffffff</color>
 
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 
     <color name="title_bg">#F8F8F8</color>
 
@@ -15,4 +16,7 @@
 
     <color name="main_title_text_select">#78ffffff</color>
     <color name="main_title_text_normal">#ABABAB</color>
+
+    <color name="line_bg">#ABABAB</color>
+
 </resources>
