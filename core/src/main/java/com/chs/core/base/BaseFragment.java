@@ -21,7 +21,7 @@ public abstract class BaseFragment extends Fragment {
 
     private Unbinder mUnbinder = null;
     private boolean isFragmentVisible;
-    private boolean isFirstVisible;
+    private boolean isFirstVisible = true;
     private Context mContext;
 
     protected abstract Object setLayoutId();

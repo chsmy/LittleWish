@@ -14,13 +14,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        OkGo.<DouBan>get("http://api.douban.com/v2/movie/top250").tag(this)
-                .execute(new DialogCallback<DouBan>(DouBan.class,this) {
-                    @Override
-                    public void onSuccess(Response<DouBan> response) {
-                        LogUtils.i("DouBan",response.body().getTitle());
-                    }
-                });
 
     }
 }

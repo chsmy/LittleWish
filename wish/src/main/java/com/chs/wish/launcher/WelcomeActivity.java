@@ -72,8 +72,8 @@ public class WelcomeActivity extends BaseActivity implements ITimerListener {
                 @Override
                 public void onNotSignIn() {
                   //去登录页
-                    startActivity(LoginActivity.class);
-//                    startActivity(HomeActivity.class);
+//                    startActivity(LoginActivity.class);
+                    startActivity(HomeActivity.class);
                 }
             });
         }

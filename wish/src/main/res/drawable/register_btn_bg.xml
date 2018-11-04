@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <!--设置背景色-->
-    <solid android:color="#FFFFFF" />
+    <solid android:color="#80D0CD" />
     <!--设置圆角-->
     <corners android:radius="30dp" />
 

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/login_bg"
+    >
+    <include layout="@layout/avtivity_login_register_head"/>
+
+    <!--手机号-->
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp8"
+        android:layout_marginEnd="@dimen/dp20"
+        android:layout_marginStart="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp40"
+        app:hintTextAppearance="@style/TextInputAppTheme"
+        >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edit_sign_in_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_name"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/sp16"
+            android:textColor="@color/white"
+            android:theme="@style/TextInputAppTheme_"
+            android:gravity="center"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <!--密码-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp20"
+        android:layout_marginStart="@dimen/dp20"
+        android:layout_marginBottom="@dimen/dp8"
+        android:layout_marginTop="@dimen/dp8"
+        app:hintTextAppearance="@style/TextInputAppTheme"
+        >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edit_sign_in_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_set_password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/white"
+            android:theme="@style/TextInputAppTheme_"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp16"
+            android:gravity="center"
+            />
+    </android.support.design.widget.TextInputLayout>
+    <!--密码-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp20"
+        android:layout_marginStart="@dimen/dp20"
+        android:layout_marginBottom="@dimen/dp8"
+        android:layout_marginTop="@dimen/dp8"
+        app:hintTextAppearance="@style/TextInputAppTheme"
+        >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edit_sign_in_aff_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_aff_password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/white"
+            android:theme="@style/TextInputAppTheme_"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp16"
+            android:gravity="center"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/register_btn_bg"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp80"
+        >
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/btn_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/dp12"
+            android:text="@string/register_text"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:drawablePadding="@dimen/dp12"
+            android:textSize="@dimen/sp16"
+            android:drawableRight="@mipmap/arrow_login_white"
+            />
+    </RelativeLayout>
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp20"
+        >
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_has_account"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp16"
+            />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_goto_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:text="@string/login_goto_login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp16"
+            />
+    </android.support.v7.widget.LinearLayoutCompat>
+</android.support.v7.widget.LinearLayoutCompat>

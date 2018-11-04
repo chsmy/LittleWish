@@ -5,8 +5,16 @@
     <string name="main_mine_text">我的</string>
     <string name="main_center_text">发布</string>
 
-    //login
+    //login register
     <string name="login_text">立即登录</string>
-    <string name="login_name">邮箱/手机号</string>
+    <string name="register_text">立即注册</string>
+    <string name="login_name">手机号码</string>
     <string name="login_password">密码</string>
+    <string name="login_set_password">设置密码</string>
+    <string name="login_aff_password">再次确认密码</string>
+    <string name="login_no_account">没有账户？</string>
+    <string name="login_has_account">已有账户？</string>
+    <string name="login_goto_login">去登录</string>
+    <string name="login_goto_register">去注册</string>
+    <string name="login_forget_password">忘记密码？</string>
 </resources>

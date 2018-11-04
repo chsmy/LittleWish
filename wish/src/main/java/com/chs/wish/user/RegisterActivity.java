@@ -10,27 +10,22 @@ import com.chs.wish.R;
 import com.chs.wish.R2;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者：chs
  * 时间：2018-10-23 11:24
  * 描述：
  */
-public class LoginActivity extends BaseActivity {
-    @BindView(R2.id.tv_goto_register)
-    AppCompatTextView tvGotoRegister;
+public class RegisterActivity extends BaseActivity {
+    @BindView(R2.id.tv_goto_login)
+    AppCompatTextView tvGotoLogin;
     @Override
     protected Object setContentLayout() {
-        return R.layout.activity_login;
+        return R.layout.activity_register;
     }
 
     @Override
     protected void init(@Nullable Bundle savedInstanceState) {
-        tvGotoRegister.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
-    }
-    @OnClick(R2.id.ll_goto_register)
-    void onClickLink() {
-        startActivity(RegisterActivity.class);
+        tvGotoLogin.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
     }
 }

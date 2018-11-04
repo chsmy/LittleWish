@@ -37,15 +37,15 @@ public class NewestFragment extends BaseFragment {
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-
+        initRefreshLayout();
+        initRecyclerView();
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView);
+        mRefreshHandler.firstPage(getActivityContext());
     }
 
     @Override
     protected void onFirstVisible() {
         super.onFirstVisible();
-        initRefreshLayout();
-        initRecyclerView();
-        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView);
     }
 
     private void initRecyclerView() {
