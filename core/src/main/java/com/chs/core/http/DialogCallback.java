@@ -15,7 +15,6 @@
  */
 package com.chs.core.http;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Window;
@@ -43,8 +42,8 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
         dialog.setMessage("请求网络中...");
     }
 
-    public DialogCallback(Context context) {
-        super();
+    public DialogCallback(Class<T> clazz,Context context) {
+        super(clazz);
         initDialog(context);
     }
 

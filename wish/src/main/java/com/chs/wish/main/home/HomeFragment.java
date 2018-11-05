@@ -31,7 +31,6 @@ public class HomeFragment extends BaseFragment {
 
     private List<BaseFragment> mFragments = new ArrayList<>();
     private String[] mTitles = new String[]{"最新","最热"};
-    private NewsPagerAdapter mPagerAdapter;
 
     public static HomeFragment newInstance(){
         return new HomeFragment();
@@ -46,10 +45,13 @@ public class HomeFragment extends BaseFragment {
     protected void initView(View view, Bundle savedInstanceState) {
         mFragments.add(NewestFragment.newInstance());
         mFragments.add(HottestFragment.newInstance());
-        mPagerAdapter = new NewsPagerAdapter(getChildFragmentManager());
-        mViewPager.setAdapter(mPagerAdapter);
+        NewsPagerAdapter pagerAdapter = new NewsPagerAdapter(getChildFragmentManager());
+        mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout.setInlineLabel(true);
+        mTabLayout.getTabAt(0).setIcon(R.drawable.tab_item_new_selector);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.tab_item_hot_selector);
     }
 
     private class NewsPagerAdapter extends FragmentStatePagerAdapter {
@@ -73,4 +75,5 @@ public class HomeFragment extends BaseFragment {
             return mTitles[position];
         }
     }
+
 }

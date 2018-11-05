@@ -1,7 +1,5 @@
 package com.chs.wish.ui;
 
-import android.content.Context;
-
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -19,7 +17,7 @@ import java.util.List;
 public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItemEntity,MultipleViewHolder>
         implements
         OnItemClickListener {
-    private List<Banner.DataBean> mBannerImages;
+    private List<Banner.BannerData> mBannerImages;
     //确保初始化一次Banner，防止重复Item加载
     private boolean mIsInitBanner = false;
    // 设置glide图片加载策略
@@ -29,12 +27,12 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .dontAnimate();
 
-    public MultipleRecyclerAdapter(List<MultipleItemEntity> data,List<Banner.DataBean> bannerImages) {
+    public MultipleRecyclerAdapter(List<MultipleItemEntity> data,List<Banner.BannerData> bannerImages) {
         super(data);
         mBannerImages = bannerImages;
         init();
     }
-    public static MultipleRecyclerAdapter create(List<MultipleItemEntity> data,List<Banner.DataBean> bannerImages) {
+    public static MultipleRecyclerAdapter create(List<MultipleItemEntity> data,List<Banner.BannerData> bannerImages) {
         return new MultipleRecyclerAdapter(data,bannerImages);
     }
     private void init() {
@@ -51,7 +49,7 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
             case ItemType.BANNER:
                 if (!mIsInitBanner) {
                     ArrayList<String> banners = new ArrayList<>();
-                    for (Banner.DataBean data : mBannerImages) {
+                    for (Banner.BannerData data : mBannerImages) {
                         banners.add(data.getPic());
                     }
                     final ConvenientBanner<String> convenientBanner = holder.getView(R.id.banner_recycler_item);

@@ -1,12 +1,10 @@
 package com.chs.wish.main.home;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chs.core.app.Wish;
 import com.chs.core.http.DialogCallback;
 import com.chs.core.recycler.ItemType;
 import com.chs.core.recycler.MultipleFields;
@@ -48,7 +46,7 @@ public class RefreshHandler implements
                         OkGo.<Banner>get(Api.BANNER)
                                 .tag(this)
                                 .params("adver_id","1")
-                                .execute(new DialogCallback<Banner>(context) {
+                                .execute(new DialogCallback<Banner>(Banner.class,context) {
                                     @Override
                                     public void onSuccess(Response<Banner> response) {
                                         ArrayList<MultipleItemEntity> multipleItemEntities = new ArrayList<>();
