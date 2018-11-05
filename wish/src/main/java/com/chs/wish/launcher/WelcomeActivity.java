@@ -67,6 +67,7 @@ public class WelcomeActivity extends BaseActivity implements ITimerListener {
                 public void onSignIn() {
                     //去主页
                    startActivity(HomeActivity.class);
+                   finish();
                 }
 
                 @Override
@@ -74,6 +75,7 @@ public class WelcomeActivity extends BaseActivity implements ITimerListener {
                   //去登录页
 //                    startActivity(LoginActivity.class);
                     startActivity(HomeActivity.class);
+                    finish();
                 }
             });
         }

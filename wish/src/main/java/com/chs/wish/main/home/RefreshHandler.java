@@ -11,11 +11,14 @@ import com.chs.core.recycler.MultipleFields;
 import com.chs.core.recycler.MultipleItemEntity;
 import com.chs.wish.Api;
 import com.chs.wish.main.home.entity.Banner;
+import com.chs.wish.main.home.entity.HomeMultipleEntity;
+import com.chs.wish.main.home.entity.WishList;
 import com.chs.wish.ui.MultipleRecyclerAdapter;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者：83734
@@ -30,6 +33,10 @@ public class RefreshHandler implements
     private final PagingBean BEAN;
     private final RecyclerView RECYCLERVIEW;
     private MultipleRecyclerAdapter mAdapter = null;
+    private List<Banner.BannerData> bannerData;
+    private List<WishList.DataBean> wishList;
+    private boolean isBannerLoadOk = false;
+    private boolean isListLoadOk = false;
 
     public RefreshHandler(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,PagingBean BEAN) {
         this.REFRESH_LAYOUT = REFRESH_LAYOUT;
@@ -49,19 +56,34 @@ public class RefreshHandler implements
                                 .execute(new DialogCallback<Banner>(Banner.class,context) {
                                     @Override
                                     public void onSuccess(Response<Banner> response) {
-                                        ArrayList<MultipleItemEntity> multipleItemEntities = new ArrayList<>();
-                                        multipleItemEntities.add(MultipleItemEntity.builder().setField(MultipleFields.ITEM_TYPE,ItemType.BANNER).build());
-                                        multipleItemEntities.add(MultipleItemEntity.builder().setField(MultipleFields.ITEM_TYPE,ItemType.CONTENT).build());
-                                        multipleItemEntities.add(MultipleItemEntity.builder().setField(MultipleFields.ITEM_TYPE,ItemType.CONTENT).build());
-                                        //设置Adapter
-                                        mAdapter = MultipleRecyclerAdapter.create(multipleItemEntities,response.body().getData());
-                                        mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLERVIEW);
-                                        RECYCLERVIEW.setAdapter(mAdapter);
-                                        BEAN.addIndex();
+                                        isBannerLoadOk = true;
+                                        bannerData = response.body().getData();
+                                        if(isListLoadOk) setAdapter();
                                     }
-
+                                });
+                        OkGo.<WishList>get(Api.WISH_LISTS)
+                                .tag(this)
+                                .execute(new DialogCallback<WishList>(WishList.class,context) {
+                                    @Override
+                                    public void onSuccess(Response<WishList> response) {
+                                        wishList = response.body().getData();
+                                        isListLoadOk = true;
+                                        if(isBannerLoadOk) setAdapter();
+                                    }
                                 });
 
+    }
+
+    private void setAdapter(){
+        ArrayList<HomeMultipleEntity> multipleItemEntities = new ArrayList<>();
+        multipleItemEntities.add(new HomeMultipleEntity(bannerData,null,ItemType.BANNER));
+        for (WishList.DataBean dataBean: wishList) {
+            multipleItemEntities.add(new HomeMultipleEntity(null,dataBean,ItemType.CONTENT));
+        }
+        mAdapter = MultipleRecyclerAdapter.create(multipleItemEntities);
+        mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLERVIEW);
+        RECYCLERVIEW.setAdapter(mAdapter);
+        BEAN.addIndex();
     }
 
     @Override

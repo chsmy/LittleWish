@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 作者：83734
  * 时间：2018/11/4
- * 描述：
+ * 描述：首页轮播图
  */
 public class Banner extends BaseEntity {
     private List<BannerData> data;

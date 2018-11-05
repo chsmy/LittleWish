@@ -11,6 +11,7 @@
 
     <color name="main_tab_item_text_select">#333333</color>
     <color name="main_tab_item_text_normal">#808288</color>
+    <color name="main_tab_indicator">#80D0CD</color>
 
     <color name="tab_item_background">#ffffffff</color>
 

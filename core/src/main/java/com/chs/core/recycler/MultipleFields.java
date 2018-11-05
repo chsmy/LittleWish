@@ -2,7 +2,7 @@ package com.chs.core.recycler;
 
 public enum  MultipleFields {
     ITEM_TYPE,
-    TITLE,
+    WISH_LIST,
     TEXT,
     IMAGE_URL,
     BANNERS,
