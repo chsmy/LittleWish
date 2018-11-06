@@ -3,8 +3,11 @@ package com.chs.wish.main.home;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chs.core.app.Wish;
 import com.chs.core.http.JsonCallback;
 import com.chs.core.recycler.ItemType;
@@ -47,6 +50,12 @@ public class RefreshHandler implements
         mAdapter.setLoadMoreView(new CustomLoadMoreView());
         mAdapter.setOnLoadMoreListener(RefreshHandler.this, mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(Wish.getApplicationContext(),"点击了"+position,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public static  RefreshHandler create(SwipeRefreshLayout swipeRefreshLayout,

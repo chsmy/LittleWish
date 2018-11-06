@@ -1,6 +1,7 @@
 package com.chs.wish.main.home.ui;
 
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -21,6 +22,6 @@ public class HomeListAdapter extends BaseQuickAdapter<WishList.DataBean,BaseView
 
     @Override
     protected void convert(BaseViewHolder helper, WishList.DataBean item) {
-
+        Toast.makeText(mContext,item.getContent(),Toast.LENGTH_LONG).show();
     }
 }

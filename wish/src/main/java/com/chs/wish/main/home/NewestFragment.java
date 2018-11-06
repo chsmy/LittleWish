@@ -6,15 +6,31 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chs.core.app.Wish;
 import com.chs.core.base.BaseFragment;
+import com.chs.core.http.JsonCallback;
 import com.chs.core.recycler.BaseDecoration;
+import com.chs.wish.Api;
 import com.chs.wish.R;
 import com.chs.wish.R2;
+import com.chs.wish.main.banner.BannerCreator;
+import com.chs.wish.main.home.entity.Banner;
+import com.chs.wish.main.home.entity.WishList;
+import com.chs.wish.main.home.ui.HomeListAdapter;
+import com.chs.wish.ui.CustomLoadMoreView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -23,12 +39,14 @@ import butterknife.BindView;
  * 时间：2018-10-26 15:53
  * 描述：最新
  */
-public class NewestFragment extends BaseFragment {
+public class NewestFragment extends BaseFragment implements OnItemClickListener {
     @BindView(R2.id.rv_home)
     RecyclerView mRecyclerView = null;
     @BindView(R2.id.srl_index)
     SwipeRefreshLayout mRefreshLayout = null;
     private RefreshHandler mRefreshHandler = null;
+    private HomeListAdapter mAdapter;
+    private PagingBean BEAN = new PagingBean();
 
     public static NewestFragment newInstance(){
         return new NewestFragment();
@@ -45,6 +63,7 @@ public class NewestFragment extends BaseFragment {
         initRecyclerView();
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView);
         mRefreshHandler.firstPage(getActivityContext());
+//        initData();
     }
 
     @Override
@@ -55,14 +74,16 @@ public class NewestFragment extends BaseFragment {
     private void initRecyclerView() {
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.addItemDecoration
-                (BaseDecoration.create(ContextCompat.getColor(getActivityContext(), R.color.line_bg), 10));
+        mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getActivityContext(), R.color.line_bg), 10));
+        mAdapter = new HomeListAdapter(R.layout.item_home_list,new ArrayList<WishList.DataBean>());
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(Wish.getApplicationContext(),"点击了"+position,Toast.LENGTH_SHORT).show();
             }
         });
+        addHeadView();
     }
 
     private void initRefreshLayout() {
@@ -73,5 +94,64 @@ public class NewestFragment extends BaseFragment {
         );
         mRefreshLayout.setProgressViewOffset(true, 120, 300);
         mRefreshLayout.setRefreshing(true);
+    }
+
+    private void initData() {
+        OkGo.<Banner>get(Api.BANNER)
+                .tag(this)
+                .params("adver_id","1")
+                .execute(new JsonCallback<Banner>(Banner.class) {
+                    @Override
+                    public void onSuccess(Response<Banner> response) {
+                        List<Banner.BannerData> bannerData = response.body().getData();
+                        ArrayList<String> banners = new ArrayList<>();
+                        for (Banner.BannerData data : bannerData) {
+                            banners.add(data.getPic());
+                        }
+                        final ConvenientBanner<String> convenientBanner = mAdapter.getHeaderLayout().findViewById(R.id.banner_recycler_item);
+                        BannerCreator.setDefault(convenientBanner, banners, NewestFragment.this);
+                    }
+                });
+        OkGo.<WishList>get(Api.WISH_LISTS)
+                .tag(this)
+                .execute(new JsonCallback<WishList>(WishList.class) {
+                    @Override
+                    public void onSuccess(Response<WishList> response) {
+                        List<WishList.DataBean> wishList = response.body().getData();
+                        setData(true,wishList);
+                    }
+                });
+    }
+    private void addHeadView() {
+        View headView = getLayoutInflater().inflate(R.layout.item_multiple_banner, (ViewGroup) mRecyclerView.getParent(), false);
+        headView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        mAdapter.addHeaderView(headView);
+    }
+    private void setData(boolean isRefresh, List data) {
+        mRefreshLayout.setRefreshing(false);
+        final int size = data == null ? 0 : data.size();
+        if (isRefresh) {
+            mAdapter.setNewData(data);
+        } else {
+            if (size > 0) {
+                mAdapter.addData(data);
+            }
+        }
+        if (size < BEAN.getPageSize()) {
+            //第一页如果不够一页就不显示没有更多数据布局
+            mAdapter.loadMoreEnd(isRefresh);
+        } else {
+            mAdapter.loadMoreComplete();
+        }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(Wish.getApplicationContext(),"点击了"+position,Toast.LENGTH_SHORT).show();
     }
 }
