@@ -7,11 +7,11 @@ package com.chs.wish.main.home;
  */
 public class PagingBean {
     //当前是第几页
-    private int mPageIndex = 0;
+    private int mPageIndex = 1;
     //总数据条数
     private int mTotal = 0;
     //一页显示几条数据
-    private int mPageSize = 0;
+    private int mPageSize = 5;
     //当前已经显示了几条数据
     private int mCurrentCount = 0;
     //加载延迟

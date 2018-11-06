@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -99,5 +100,8 @@ public abstract class BaseFragment extends Fragment {
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
+    }
+    protected void showToast(String msg){
+        Toast.makeText(getActivityContext(),msg,Toast.LENGTH_SHORT).show();
     }
 }

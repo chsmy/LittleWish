@@ -6,7 +6,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.chs.core.app.Wish;
 import com.chs.core.base.BaseFragment;
 import com.chs.core.recycler.BaseDecoration;
 import com.chs.wish.R;
@@ -52,8 +56,13 @@ public class NewestFragment extends BaseFragment {
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration
-                (BaseDecoration.create(ContextCompat.getColor(getActivityContext(), R.color.app_background), 5));
-
+                (BaseDecoration.create(ContextCompat.getColor(getActivityContext(), R.color.line_bg), 10));
+        mRecyclerView.addOnItemTouchListener(new OnItemChildClickListener() {
+            @Override
+            public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(Wish.getApplicationContext(),"点击了"+position,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initRefreshLayout() {
@@ -63,5 +72,6 @@ public class NewestFragment extends BaseFragment {
                 android.R.color.holo_red_light
         );
         mRefreshLayout.setProgressViewOffset(true, 120, 300);
+        mRefreshLayout.setRefreshing(true);
     }
 }

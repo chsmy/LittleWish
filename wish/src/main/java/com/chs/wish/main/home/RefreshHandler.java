@@ -5,14 +5,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chs.core.http.DialogCallback;
+import com.chs.core.app.Wish;
+import com.chs.core.http.JsonCallback;
 import com.chs.core.recycler.ItemType;
-import com.chs.core.recycler.MultipleFields;
-import com.chs.core.recycler.MultipleItemEntity;
 import com.chs.wish.Api;
 import com.chs.wish.main.home.entity.Banner;
 import com.chs.wish.main.home.entity.HomeMultipleEntity;
 import com.chs.wish.main.home.entity.WishList;
+import com.chs.wish.ui.CustomLoadMoreView;
 import com.chs.wish.ui.MultipleRecyclerAdapter;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -29,19 +29,24 @@ public class RefreshHandler implements
         SwipeRefreshLayout.OnRefreshListener
         , BaseQuickAdapter.RequestLoadMoreListener {
 
-    private final SwipeRefreshLayout REFRESH_LAYOUT;
+    private final SwipeRefreshLayout mSwipeRefreshLayout;
     private final PagingBean BEAN;
-    private final RecyclerView RECYCLERVIEW;
+    private final RecyclerView mRecyclerView;
     private MultipleRecyclerAdapter mAdapter = null;
     private List<Banner.BannerData> bannerData;
     private List<WishList.DataBean> wishList;
     private boolean isBannerLoadOk = false;
     private boolean isListLoadOk = false;
 
-    public RefreshHandler(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,PagingBean BEAN) {
-        this.REFRESH_LAYOUT = REFRESH_LAYOUT;
+    public RefreshHandler(SwipeRefreshLayout swipeRefreshLayout, RecyclerView recyclerView,PagingBean BEAN) {
+        this.mSwipeRefreshLayout = swipeRefreshLayout;
         this.BEAN = BEAN;
-        this.RECYCLERVIEW = RECYCLERVIEW;
+        this.mRecyclerView = recyclerView;
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mAdapter = MultipleRecyclerAdapter.create(new ArrayList<HomeMultipleEntity>());
+        mAdapter.setLoadMoreView(new CustomLoadMoreView());
+        mAdapter.setOnLoadMoreListener(RefreshHandler.this, mRecyclerView);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     public static  RefreshHandler create(SwipeRefreshLayout swipeRefreshLayout,
@@ -53,7 +58,7 @@ public class RefreshHandler implements
                         OkGo.<Banner>get(Api.BANNER)
                                 .tag(this)
                                 .params("adver_id","1")
-                                .execute(new DialogCallback<Banner>(Banner.class,context) {
+                                .execute(new JsonCallback<Banner>(Banner.class) {
                                     @Override
                                     public void onSuccess(Response<Banner> response) {
                                         isBannerLoadOk = true;
@@ -63,7 +68,7 @@ public class RefreshHandler implements
                                 });
                         OkGo.<WishList>get(Api.WISH_LISTS)
                                 .tag(this)
-                                .execute(new DialogCallback<WishList>(WishList.class,context) {
+                                .execute(new JsonCallback<WishList>(WishList.class) {
                                     @Override
                                     public void onSuccess(Response<WishList> response) {
                                         wishList = response.body().getData();
@@ -71,28 +76,53 @@ public class RefreshHandler implements
                                         if(isBannerLoadOk) setAdapter();
                                     }
                                 });
-
     }
 
     private void setAdapter(){
+        mSwipeRefreshLayout.setRefreshing(false);
         ArrayList<HomeMultipleEntity> multipleItemEntities = new ArrayList<>();
         multipleItemEntities.add(new HomeMultipleEntity(bannerData,null,ItemType.BANNER));
         for (WishList.DataBean dataBean: wishList) {
             multipleItemEntities.add(new HomeMultipleEntity(null,dataBean,ItemType.CONTENT));
         }
-        mAdapter = MultipleRecyclerAdapter.create(multipleItemEntities);
-        mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLERVIEW);
-        RECYCLERVIEW.setAdapter(mAdapter);
-        BEAN.addIndex();
+        setData(true,multipleItemEntities);
     }
 
     @Override
     public void onRefresh() {
-
+//        mAdapter.setEnableLoadMore(false);
+        mSwipeRefreshLayout.setRefreshing(true);
+        Wish.getHandler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+//                mAdapter.setEnableLoadMore(true);
+                //进行一些网络请求
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 1000);
     }
 
     @Override
     public void onLoadMoreRequested() {
+        BEAN.addIndex();
+        boolean isRefresh =BEAN.getPageIndex() ==1;
 
+    }
+
+    private void setData(boolean isRefresh, List data) {
+        final int size = data == null ? 0 : data.size();
+        if (isRefresh) {
+            mAdapter.setNewData(data);
+        } else {
+            if (size > 0) {
+                mAdapter.addData(data);
+            }
+        }
+        if (size < BEAN.getPageSize()) {
+            //第一页如果不够一页就不显示没有更多数据布局
+            mAdapter.loadMoreEnd(isRefresh);
+        } else {
+            mAdapter.loadMoreComplete();
+        }
     }
 }
