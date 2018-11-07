@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:hyman="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:clipChildren="false"
-    android:clipToPadding="false"
     >
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -37,24 +39,11 @@
             android:text="@string/main_home_text"
             android:textColor="@drawable/tabitem_txt_sel" />
 
-        <FrameLayout
+        <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            >
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/main_add"
-                android:text="@string/main_center_text"
-                android:layout_gravity="center|bottom"
-                android:gravity="center"
-                android:layout_marginTop="-40dp"
-                />
-        </FrameLayout>
-
+            />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_mine"
@@ -70,5 +59,14 @@
             android:textColor="@drawable/tabitem_txt_sel" />
 
     </LinearLayout>
-
-</LinearLayout>
+    </android.support.v7.widget.LinearLayoutCompat>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_publish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/main_add"
+        android:text="@string/main_center_text"
+        android:layout_gravity="center|bottom"
+        android:gravity="center"
+        />
+</FrameLayout>

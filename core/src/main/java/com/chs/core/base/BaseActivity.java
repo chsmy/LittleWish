@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.chs.core.R;
-import com.chs.core.utils.StatusBarUtil;
+import com.chs.core.utils.StatusBarCompat;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -27,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void init(@Nullable Bundle savedInstanceState);
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -40,7 +40,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             throw new ClassCastException("type of setLayout() must be int or View!");
         }
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.title_bg));
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.title_bg));
+        StatusBarCompat.setLightMode(this);
         mUnbinder = ButterKnife.bind(this);
         init(savedInstanceState);
     }
@@ -57,5 +58,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
+    }
+    /**
+     * @param view 标题栏左侧按钮点击事件
+     */
+    public void goBack(View view) {
+        onBackPressed();
     }
 }

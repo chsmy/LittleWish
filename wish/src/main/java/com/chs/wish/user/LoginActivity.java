@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 
 import com.chs.core.base.BaseActivity;
+import com.chs.core.utils.StatusBarCompat;
 import com.chs.wish.R;
 import com.chs.wish.R2;
 
@@ -27,6 +28,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void init(@Nullable Bundle savedInstanceState) {
+        StatusBarCompat.translucentStatusBar(this);
         tvGotoRegister.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
     }
     @OnClick(R2.id.ll_goto_register)

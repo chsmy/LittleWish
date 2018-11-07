@@ -1,6 +1,7 @@
 package com.chs.core.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -101,6 +102,12 @@ public abstract class BaseFragment extends Fragment {
             mUnbinder.unbind();
         }
     }
+
+    protected void startActivity(Class clazz){
+        Intent intent = new Intent(mContext,clazz);
+        startActivity(intent);
+    }
+
     protected void showToast(String msg){
         Toast.makeText(getActivityContext(),msg,Toast.LENGTH_SHORT).show();
     }

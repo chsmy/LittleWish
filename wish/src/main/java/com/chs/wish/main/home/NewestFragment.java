@@ -1,31 +1,28 @@
 package com.chs.wish.main.home;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chs.core.app.Wish;
 import com.chs.core.base.BaseFragment;
 import com.chs.core.http.JsonCallback;
-import com.chs.core.recycler.BaseDecoration;
 import com.chs.wish.Api;
 import com.chs.wish.R;
 import com.chs.wish.R2;
 import com.chs.wish.main.banner.BannerCreator;
+import com.chs.wish.main.detail.WishDetailActivity;
 import com.chs.wish.main.home.entity.Banner;
 import com.chs.wish.main.home.entity.WishList;
 import com.chs.wish.main.home.ui.HomeListAdapter;
-import com.chs.wish.ui.CustomLoadMoreView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
@@ -61,9 +58,9 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener 
     protected void initView(View view, Bundle savedInstanceState) {
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView);
-        mRefreshHandler.firstPage(getActivityContext());
-//        initData();
+//        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView);
+//        mRefreshHandler.firstPage(getActivityContext());
+        initData();
     }
 
     @Override
@@ -74,13 +71,14 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener 
     private void initRecyclerView() {
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getActivityContext(), R.color.line_bg), 10));
+//        mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getActivityContext(), R.color.line_bg), 10));
         mAdapter = new HomeListAdapter(R.layout.item_home_list,new ArrayList<WishList.DataBean>());
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnItemTouchListener(new OnItemChildClickListener() {
+        mRecyclerView.addOnItemTouchListener(new com.chad.library.adapter.base.listener.OnItemClickListener() {
             @Override
-            public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(Wish.getApplicationContext(),"点击了"+position,Toast.LENGTH_SHORT).show();
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getActivityContext(),WishDetailActivity.class);
+                startActivity(intent);
             }
         });
         addHeadView();

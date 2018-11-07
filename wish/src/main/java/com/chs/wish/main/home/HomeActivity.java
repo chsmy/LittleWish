@@ -12,12 +12,13 @@ import com.chs.core.base.BaseFragment;
 import com.chs.wish.R;
 import com.chs.wish.R2;
 import com.chs.wish.main.MineFragment;
+import com.chs.wish.main.publish.PublishWishActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 作者：chs
@@ -41,7 +42,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void init(@Nullable Bundle savedInstanceState) {
-//        StatusBarUtil.setColor(this, getResources().getColor(R.color.tab_item_background));
         mFragments.add(HomeFragment.newInstance());
         getSupportFragmentManager().beginTransaction().add(R.id.container, mFragments.get(0)).commit();
         mTvHome.setOnClickListener(this);
@@ -94,10 +94,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             currentId = v.getId();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @OnClick(R2.id.tv_publish)
+    void goToPublish(){
+        startActivity(PublishWishActivity.class);
     }
+
 }

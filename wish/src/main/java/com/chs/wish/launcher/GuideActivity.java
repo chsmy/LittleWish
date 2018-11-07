@@ -11,7 +11,7 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.chs.core.app.AccountManager;
 import com.chs.core.app.IUserChecker;
 import com.chs.core.base.BaseActivity;
-import com.chs.core.utils.StatusBarUtil;
+import com.chs.core.utils.StatusBarCompat;
 import com.chs.core.utils.WishPreference;
 import com.chs.wish.R;
 import com.chs.wish.main.home.HomeActivity;
@@ -36,7 +36,7 @@ public class GuideActivity extends BaseActivity implements OnItemClickListener {
 
     @Override
     protected void init(@Nullable Bundle savedInstanceState) {
-        StatusBarUtil.setTransparent(this);
+        StatusBarCompat.translucentStatusBar(this);
         initBanner();
     }
     private void initBanner() {
