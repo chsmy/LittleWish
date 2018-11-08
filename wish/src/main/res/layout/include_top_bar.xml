@@ -4,11 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:gravity="center_vertical"
+    android:background="@color/title_bg"
     >
-    <android.support.v7.widget.AppCompatImageView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/top_bar_back"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp16"
         android:onClick="goBack"
         />
     <android.support.v7.widget.AppCompatTextView
@@ -16,12 +19,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp18"
         />
-    <android.support.v7.widget.AppCompatImageView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/top_bar_modifier"
         android:layout_gravity="end"
+        android:textColor="@color/black"
         android:layout_marginEnd="@dimen/dp10"
+        android:textSize="@dimen/sp16"
         />
 </android.support.v7.widget.Toolbar>

@@ -11,7 +11,7 @@ import com.chs.core.base.BaseActivity;
 import com.chs.core.base.BaseFragment;
 import com.chs.wish.R;
 import com.chs.wish.R2;
-import com.chs.wish.main.MineFragment;
+import com.chs.wish.main.mine.MineFragment;
 import com.chs.wish.main.publish.PublishWishActivity;
 
 import java.util.ArrayList;

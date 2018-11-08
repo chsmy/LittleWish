@@ -9,7 +9,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp70"
-        android:orientation="horizontal"
         android:paddingStart="@dimen/dp10"
         android:paddingTop="@dimen/dp10"
         android:paddingEnd="@dimen/dp10"

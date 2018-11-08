@@ -41,7 +41,6 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener 
     RecyclerView mRecyclerView = null;
     @BindView(R2.id.srl_index)
     SwipeRefreshLayout mRefreshLayout = null;
-    private RefreshHandler mRefreshHandler = null;
     private HomeListAdapter mAdapter;
     private PagingBean BEAN = new PagingBean();
 
@@ -58,8 +57,6 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener 
     protected void initView(View view, Bundle savedInstanceState) {
         initRefreshLayout();
         initRecyclerView();
-//        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView);
-//        mRefreshHandler.firstPage(getActivityContext());
         initData();
     }
 

@@ -17,4 +17,14 @@
     <string name="login_goto_login">去登录</string>
     <string name="login_goto_register">去注册</string>
     <string name="login_forget_password">忘记密码？</string>
+
+    //publish
+    <string name="publish_top_cancel">取消</string>
+    <string name="publish_publish_wish">发布心愿</string>
+    <string name="publish_next">下一步</string>
+
+    //detail
+    <string name="wish_list_detail_title">心愿单详情</string>
+
+
 </resources>
