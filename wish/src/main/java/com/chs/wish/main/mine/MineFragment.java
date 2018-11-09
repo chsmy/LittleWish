@@ -12,9 +12,6 @@ import android.view.View;
 import com.chs.core.base.BaseFragment;
 import com.chs.wish.R;
 import com.chs.wish.R2;
-import com.chs.wish.main.home.HomeFragment;
-import com.chs.wish.main.home.HottestFragment;
-import com.chs.wish.main.home.NewestFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +61,6 @@ public class MineFragment extends BaseFragment {
         PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTabLayout.setInlineLabel(true);
     }
 

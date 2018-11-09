@@ -2,7 +2,9 @@
           package="com.chs.wish">
 <application>
 
-    <activity android:name=".launcher.WelcomeActivity">
+    <activity android:name=".launcher.WelcomeActivity"
+        android:theme="@style/LoadingSplash"
+        >
         <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
 
@@ -15,7 +17,9 @@
     <activity android:name=".main.home.HomeActivity"/>
     <activity android:name=".user.RegisterActivity"/>
     <activity android:name=".main.detail.WishDetailActivity"/>
-    <activity android:name=".main.publish.PublishWishActivity"/>
+    <activity android:name=".main.publish.PublishWishActivity"
+              android:windowSoftInputMode="stateVisible|adjustResize"
+        />
 
 
 </application>

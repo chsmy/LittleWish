@@ -6,7 +6,7 @@
     
     <dimen name="main_tab_item_image_and_text">3dp</dimen>
     <dimen name="statusbar_view_height">0dp</dimen>
-
+    <dimen name="grid_expected_size">120dp</dimen>
 
     <dimen name="sp12">12sp</dimen>
     <dimen name="sp14">14sp</dimen>
@@ -14,6 +14,7 @@
     <dimen name="sp18">18sp</dimen>
 
     <dimen name="dp1">1dp</dimen>
+    <dimen name="dp2">2dp</dimen>
     <dimen name="dp5">5dp</dimen>
     <dimen name="dp8">8dp</dimen>
     <dimen name="dp10">10dp</dimen>

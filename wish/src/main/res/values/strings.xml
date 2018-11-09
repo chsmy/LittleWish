@@ -25,6 +25,14 @@
 
     //detail
     <string name="wish_list_detail_title">心愿单详情</string>
+    <string name="publish_please_input_title">请输入标题</string>
+    <string name="publish_please_input_content">请输入内容</string>
+    <string name="publish_select_time">选择发生时间</string>
+    <string name="publish_select_location">选择发生位置</string>
+    <string name="publish_find_people">找人</string>
+    <string name="publish_select_label">选择标签</string>
+    <string name="publish_select_things">找物</string>
 
 
+    <string name="error_gif">长宽不小于 %1$dpx，且大小不超过 %2$sM。</string>
 </resources>
