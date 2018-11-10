@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -26,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp10"
                 android:layout_weight="1"
+                android:textCursorDrawable="@color/main_tab_item_text_normal"
                 android:hint="@string/publish_please_input_title"
                 />
 
@@ -42,7 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp10"
             android:layout_marginEnd="@dimen/dp10"
+            android:paddingTop="@dimen/dp10"
+            android:paddingBottom="@dimen/dp10"
             android:background="@color/white"
+            android:textSize="@dimen/sp14"
+            android:textCursorDrawable="@color/main_tab_item_text_normal"
             android:hint="@string/publish_please_input_content"
             />
 
@@ -70,23 +76,42 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/publish_label_bg"
+                    android:paddingStart="@dimen/dp8"
+                    android:paddingEnd="@dimen/dp8"
+                    android:paddingTop="@dimen/dp5"
+                    android:paddingBottom="@dimen/dp5"
                     android:text="@string/publish_find_people"
                     />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/publish_label_bg"
+                    android:paddingStart="@dimen/dp8"
+                    android:paddingEnd="@dimen/dp8"
+                    android:paddingTop="@dimen/dp5"
+                    android:paddingBottom="@dimen/dp5"
+                    android:layout_marginStart="@dimen/dp5"
                     android:text="@string/publish_select_things"
                     />
 
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/publish_label_bg"
+                    android:paddingStart="@dimen/dp8"
+                    android:paddingEnd="@dimen/dp8"
+                    android:paddingTop="@dimen/dp5"
+                    android:paddingBottom="@dimen/dp5"
+                    android:layout_marginStart="@dimen/dp5"
+                    />
             </android.support.v7.widget.LinearLayoutCompat>
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
                 android:text="@string/publish_select_time"
                 />
 
@@ -96,6 +121,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp10"
                 android:drawableEnd="@mipmap/publish_select_time"
+                android:background="@drawable/publish_label_bg"
+                android:paddingStart="@dimen/dp8"
+                android:paddingEnd="@dimen/dp8"
+                android:paddingTop="@dimen/dp5"
+                android:paddingBottom="@dimen/dp5"
                 android:drawablePadding="@dimen/dp10"
                 android:text="2008-09-14"/>
 
@@ -112,9 +142,22 @@
                 android:layout_marginTop="@dimen/dp10"
                 android:drawableEnd="@mipmap/location_gray"
                 android:drawablePadding="@dimen/dp10"
+                android:background="@drawable/publish_label_bg"
+                android:paddingStart="@dimen/dp8"
+                android:paddingEnd="@dimen/dp8"
+                android:paddingTop="@dimen/dp5"
+                android:paddingBottom="@dimen/dp5"
                 android:text="2008-09-14"
                 />
         </android.support.v7.widget.LinearLayoutCompat>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp5"
+            android:paddingStart="@dimen/dp10"
+            android:paddingEnd="@dimen/dp10"
+            />
     </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.v7.widget.LinearLayoutCompat

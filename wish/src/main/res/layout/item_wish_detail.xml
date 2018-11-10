@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+
+        <com.chs.core.widget.CircleImageView
+            android:id="@+id/iv_author"
+            android:layout_width="@dimen/dp60"
+            android:layout_height="@dimen/dp60"
+            android:layout_marginStart="@dimen/dp10"
+            android:src="@mipmap/head"
+            />
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp60"
+            android:layout_marginStart="@dimen/dp10"
+            android:gravity="center_vertical"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_help_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="來自星星的你"
+                />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_help_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018-06-01 23:41"
+                android:layout_below="@id/tv_help_name"
+                />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_applying"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/dp10"
+                android:text="申請助力"
+                />
+        </RelativeLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發
+阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發阿發阿斯頓發"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp10"
+            />
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/location_gray"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp5"
+            android:drawablePadding="@dimen/dp5"
+            android:text="北京"
+            />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.v7.widget.LinearLayoutCompat>

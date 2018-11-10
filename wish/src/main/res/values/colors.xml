@@ -17,4 +17,6 @@
 
     <color name="line_bg">#EDEDED</color>
 
+    <color name="label_detail_status">#FAC1C1</color>
+
 </resources>

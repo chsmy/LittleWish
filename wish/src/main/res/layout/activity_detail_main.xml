@@ -41,7 +41,7 @@
         android:layout_toEndOf="@id/iv_author"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/dp10"
-        android:text="1小时前"
+        android:text="果子熟了"
         />
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -49,6 +49,10 @@
         android:layout_toEndOf="@id/tv_time"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/dp10"
+        android:background="@drawable/label_detail_status_bg"
+        android:paddingStart="@dimen/dp5"
+        android:paddingEnd="@dimen/dp5"
+        android:textColor="@color/label_detail_status"
         android:text="待还愿"
         />
     <android.support.v7.widget.AppCompatTextView
@@ -124,4 +128,23 @@
             android:text="144"
             />
     </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/detail_apply_for_help"
+        android:paddingTop="@dimen/dp5"
+        android:paddingBottom="@dimen/dp5"
+        android:paddingStart="@dimen/dp15"
+        android:paddingEnd="@dimen/dp15"
+        android:layout_marginBottom="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
+        android:text="申请助力"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp10"
+        android:background="@color/line_bg"
+        />
 </android.support.v7.widget.LinearLayoutCompat>

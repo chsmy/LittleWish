@@ -37,6 +37,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:orientation="horizontal"
+                   android:gravity="center_vertical"
                    >
                    <android.support.v7.widget.AppCompatTextView
                        android:id="@+id/tv_author"
@@ -48,10 +49,12 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:background="@mipmap/main_mine_sex_man"
+                       android:layout_marginStart="@dimen/dp10"
                        />
                    <android.support.v7.widget.AppCompatTextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
+                       android:layout_marginStart="@dimen/dp10"
                        android:text="28岁"
                        />
                </android.support.v7.widget.LinearLayoutCompat>

@@ -1,18 +1,27 @@
 package com.chs.wish.main.publish;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.DatePicker;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chs.core.base.BaseActivity;
 import com.chs.wish.R;
 import com.chs.wish.R2;
+import com.chs.wish.main.detail.WishDetailActivity;
+import com.chs.wish.main.home.entity.WishList;
+import com.chs.wish.main.home.ui.HomeListAdapter;
+import com.chs.wish.main.publish.ui.PublishImgAdapter;
 import com.chs.wish.ui.GifSizeFilter;
 import com.chs.wish.ui.Glide4Engine;
 import com.yanzhenjie.permission.Action;
@@ -25,6 +34,7 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy;
 import com.zhihu.matisse.listener.OnCheckedListener;
 import com.zhihu.matisse.listener.OnSelectedListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -45,8 +55,11 @@ public class PublishWishActivity extends BaseActivity {
     AppCompatTextView mTvRight;
     @BindView(R2.id.tv_select_time)
     AppCompatTextView mTvSelectedTime;
+    @BindView((R2.id.rv_pic))
+    RecyclerView mRvPic;
     private String selectedDate = "";
     private static final int REQUEST_CODE_CHOOSE = 23;
+    private PublishImgAdapter mAdapter = null;
     @Override
     protected Object setContentLayout() {
         return R.layout.activity_publish_main;
@@ -57,6 +70,30 @@ public class PublishWishActivity extends BaseActivity {
         mTvLeft.setText(R.string.publish_top_cancel);
         mTvTitle.setText(R.string.publish_publish_wish);
         mTvRight.setText(R.string.publish_next);
+        initRecyclerView();
+    }
+    private void initRecyclerView() {
+        final LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRvPic.setLayoutManager(manager);
+        mAdapter = new PublishImgAdapter(R.layout.item_show_img,new ArrayList<Uri>());
+        mRvPic.setAdapter(mAdapter);
+        mRvPic.addOnItemTouchListener(new com.chad.library.adapter.base.listener.OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+               showToast("点击了");
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
+            if (data!=null)
+            mAdapter.setNewData(Matisse.obtainResult(data));
+            Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data)));
+        }
     }
 
     @OnClick(R2.id.tv_select_time)
@@ -79,43 +116,21 @@ public class PublishWishActivity extends BaseActivity {
     void selectImage(){
         AndPermission.with(this)
                 .runtime()
-                .permission(Permission.Group.PHONE)
+                .permission(Permission.Group.CAMERA)
                 .onGranted(new Action<List<String>>() {
                     @Override
                     public void onAction(List<String> data) {
                         Matisse.from(PublishWishActivity.this)
-                                .choose(MimeType.ofAll(), false)
+                                .choose(MimeType.ofAll())
                                 .countable(true)
+                                .captureStrategy(new CaptureStrategy(true, "com.chs.wish.fileprovider","test"))
                                 .capture(true)
-                                .captureStrategy(
-                                        new CaptureStrategy(true, "com.zhihu.matisse.sample.fileprovider","test"))
                                 .maxSelectable(9)
                                 .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                                .gridExpectedSize(
-                                        getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
-                                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                                .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                                 .thumbnailScale(0.85f)
-//                                            .imageEngine(new GlideEngine())  // for glide-V3
-                                .imageEngine(new Glide4Engine())    // for glide-V4
-                                .setOnSelectedListener(new OnSelectedListener() {
-                                    @Override
-                                    public void onSelected(
-                                            @NonNull List<Uri> uriList, @NonNull List<String> pathList) {
-                                        // DO SOMETHING IMMEDIATELY HERE
-                                        Log.e("onSelected", "onSelected: pathList=" + pathList);
-
-                                    }
-                                })
-                                .originalEnable(true)
-                                .maxOriginalSize(10)
-                                .autoHideToolbarOnSingleTap(true)
-                                .setOnCheckedListener(new OnCheckedListener() {
-                                    @Override
-                                    public void onCheck(boolean isChecked) {
-                                        // DO SOMETHING IMMEDIATELY HERE
-                                        Log.e("isChecked", "onCheck: isChecked=" + isChecked);
-                                    }
-                                })
+                                .imageEngine(new Glide4Engine())
                                 .forResult(REQUEST_CODE_CHOOSE);
                     }
                 })

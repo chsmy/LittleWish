@@ -62,6 +62,7 @@ public class MineFragment extends BaseFragment {
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setInlineLabel(true);
+        mViewPager.setOffscreenPageLimit(3);
     }
 
     @OnClick(R2.id.tv_left)

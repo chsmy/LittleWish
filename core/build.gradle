@@ -66,8 +66,10 @@ dependencies {
         exclude group: "com.android.support"
     }
 
+    //图片选择器
     api 'com.zhihu.android:matisse:0.5.2-beta3'
 
+    //权限管理
     api 'com.yanzhenjie:permission:2.0.0-rc12'
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
