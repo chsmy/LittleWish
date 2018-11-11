@@ -8,6 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatTextView;
 
 import com.blankj.utilcode.util.StringUtils;
+import com.chs.core.app.AccountManager;
 import com.chs.core.base.BaseActivity;
 import com.chs.core.base.BaseEntity;
 import com.chs.core.http.DialogCallback;
@@ -70,6 +71,8 @@ public class LoginActivity extends BaseActivity {
                             if(returncode.equals("0")){
                                 showToast("登录成功");
                                 startActivity(HomeActivity.class);
+                                AccountManager.setSingState(true);
+                                finish();
                             }else {
                                 showToast("登录失败"+response.message());
                             }

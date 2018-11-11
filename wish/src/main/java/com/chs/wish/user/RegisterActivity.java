@@ -75,6 +75,7 @@ public class RegisterActivity extends BaseActivity {
                             if(returncode.equals("0")){
                                 showToast("注册成功");
                                 startActivity(HomeActivity.class);
+                                finish();
                             }else {
                                 showToast("注册失败"+response.message());
                             }
