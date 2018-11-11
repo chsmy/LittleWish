@@ -14,6 +14,7 @@ import com.chs.core.utils.WishPreference;
 import com.chs.wish.R;
 import com.chs.wish.R2;
 import com.chs.wish.main.home.HomeActivity;
+import com.chs.wish.user.LoginActivity;
 
 import java.text.MessageFormat;
 import java.util.Timer;
@@ -72,8 +73,8 @@ public class WelcomeActivity extends BaseActivity implements ITimerListener {
                 @Override
                 public void onNotSignIn() {
                   //去登录页
-//                    startActivity(LoginActivity.class);
-                    startActivity(HomeActivity.class);
+                    startActivity(LoginActivity.class);
+//                    startActivity(HomeActivity.class);
                     finish();
                 }
             });

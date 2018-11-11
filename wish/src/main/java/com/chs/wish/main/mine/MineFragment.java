@@ -90,4 +90,9 @@ public class MineFragment extends BaseFragment {
             return mTitles[position];
         }
     }
+
+    @OnClick(R2.id.ll_my_message)
+    void showMyMessage(){
+        startActivity(MyMessageActivity.class);
+    }
 }

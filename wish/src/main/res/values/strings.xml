@@ -33,6 +33,14 @@
     <string name="publish_select_label">选择标签</string>
     <string name="publish_select_things">找物</string>
 
-
     <string name="error_gif">长宽不小于 %1$dpx，且大小不超过 %2$sM。</string>
+
+    //mine
+    <string name="mine_finish">完成</string>
+    <string name="mine__msg_my_name">昵称</string>
+    <string name="mine_msg_wish_num">心愿号</string>
+    <string name="mine_msg_desc">简介</string>
+    <string name="mine_msg_sex">性别</string>
+    <string name="mine_msg_birthday">生日</string>
+    <string name="mine_msg_binding_num">绑定账号</string>
 </resources>
