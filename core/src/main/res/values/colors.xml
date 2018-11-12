@@ -3,9 +3,10 @@
 
     <color name="colorPrimary">#F8F8F8</color>
     <color name="colorPrimaryDark">#F8F8F8</color>
-    <color name="colorAccent">#ffffffff</color>
+    <color name="colorAccent">#808288</color>
 
     <color name="title_bg">#F8F8F8</color>
     <color name="app_background">#1111</color>
 
+    <color name="color_normal">#80D0CD</color>
 </resources>

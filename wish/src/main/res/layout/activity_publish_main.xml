@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp10"
                 android:layout_weight="1"
-                android:textCursorDrawable="@color/main_tab_item_text_normal"
+                android:textCursorDrawable="@null"
                 android:hint="@string/publish_please_input_title"
                 />
 
@@ -48,7 +48,7 @@
             android:paddingBottom="@dimen/dp10"
             android:background="@color/white"
             android:textSize="@dimen/sp14"
-            android:textCursorDrawable="@color/main_tab_item_text_normal"
+            android:textCursorDrawable="@null"
             android:hint="@string/publish_please_input_content"
             />
 

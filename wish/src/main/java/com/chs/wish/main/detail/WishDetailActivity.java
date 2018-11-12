@@ -7,8 +7,10 @@ import android.support.v7.widget.AppCompatTextView;
 import com.chs.core.base.BaseActivity;
 import com.chs.wish.R;
 import com.chs.wish.R2;
+import com.chs.wish.main.publish.ApplyForHelpActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 作者：chs
@@ -32,6 +34,11 @@ public class WishDetailActivity extends BaseActivity {
         mTvLeft.setBackgroundResource(R.mipmap.top_bar_back);
         mTvTitle.setText(R.string.wish_list_detail_title);
         mTvRight.setBackgroundResource(R.mipmap.top_bar_modifier);
+    }
+
+    @OnClick(R2.id.tv_apply)
+    void applyForHelp(){
+      startActivity(ApplyForHelpActivity.class);
     }
 
 }

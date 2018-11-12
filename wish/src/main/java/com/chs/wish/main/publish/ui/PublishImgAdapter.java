@@ -3,6 +3,8 @@ package com.chs.wish.main.publish.ui;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -34,9 +36,22 @@ public class PublishImgAdapter extends BaseQuickAdapter<Uri,BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, Uri item) {
         AppCompatImageView imageView = helper.getView(R.id.iv_img);
+        AppCompatImageView deleteView = helper.getView(R.id.delete_pic);
         Glide.with(mContext)
                 .load(item)
                 .apply(RECYCLER_OPTIONS)
                 .into(imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"imageView",Toast.LENGTH_SHORT).show();
+            }
+        });
+        deleteView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"delete",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

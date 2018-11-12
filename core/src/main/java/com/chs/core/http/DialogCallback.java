@@ -18,7 +18,10 @@ package com.chs.core.http;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Window;
+import android.widget.Toast;
 
+import com.chs.core.R;
+import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 
 /**
@@ -33,6 +36,7 @@ import com.lzy.okgo.request.base.Request;
 public abstract class DialogCallback<T> extends JsonCallback<T> {
 
     private ProgressDialog dialog;
+    private Context mContext;
 
     private void initDialog(Context context) {
         dialog = new ProgressDialog(context);
@@ -40,6 +44,7 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
         dialog.setCanceledOnTouchOutside(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("请求网络中...");
+        mContext = context;
     }
 
     public DialogCallback(Class<T> clazz,Context context) {
@@ -60,5 +65,11 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
+    }
+
+    @Override
+    public void onError(Response<T> response) {
+        super.onError(response);
+        Toast.makeText(mContext,mContext.getString(R.string.connect_net_failed),Toast.LENGTH_LONG).show();
     }
 }

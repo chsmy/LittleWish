@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">core</string>
+    <string name="connect_net_failed">网络请求失败</string>
 </resources>

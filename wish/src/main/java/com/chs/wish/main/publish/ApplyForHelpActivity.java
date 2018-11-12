@@ -1,6 +1,5 @@
 package com.chs.wish.main.publish;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -10,7 +9,6 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.DatePicker;
 
 import com.chs.core.base.BaseActivity;
 import com.chs.wish.R;
@@ -27,7 +25,6 @@ import com.zhihu.matisse.filter.Filter;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,39 +32,38 @@ import butterknife.OnClick;
 
 /**
  * 作者：chs
- * 时间：2018-11-07 11:05
- * 描述：发布心愿
+ * 时间：2018-11-12 13:29
+ * 描述：申请助力
  */
-public class PublishWishActivity extends BaseActivity {
+public class ApplyForHelpActivity extends BaseActivity {
     @BindView(R2.id.tv_left)
     AppCompatTextView mTvLeft;
     @BindView(R2.id.tv_title)
     AppCompatTextView mTvTitle;
     @BindView(R2.id.tv_right)
     AppCompatTextView mTvRight;
-    @BindView(R2.id.tv_select_time)
-    AppCompatTextView mTvSelectedTime;
     @BindView((R2.id.rv_pic))
     RecyclerView mRvPic;
-    private String selectedDate = "";
     private PublishImgAdapter mAdapter = null;
+
     @Override
     protected Object setContentLayout() {
-        return R.layout.activity_publish_main;
+        return R.layout.activity_apply_for_help;
     }
 
     @Override
     protected void init(@Nullable Bundle savedInstanceState) {
         mTvLeft.setText(R.string.publish_top_cancel);
-        mTvTitle.setText(R.string.publish_publish_wish);
-        mTvRight.setText(R.string.publish_next);
+        mTvTitle.setText(R.string.publish_apply_for_help);
+        mTvRight.setText(R.string.publish_send);
         initRecyclerView();
     }
+
     private void initRecyclerView() {
         final LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRvPic.setLayoutManager(manager);
-        mAdapter = new PublishImgAdapter(R.layout.item_show_img,new ArrayList<Uri>());
+        mAdapter = new PublishImgAdapter(R.layout.item_show_img, new ArrayList<Uri>());
         mRvPic.setAdapter(mAdapter);
     }
 
@@ -75,40 +71,24 @@ public class PublishWishActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PubConst.REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
-            if (data!=null)
-            mAdapter.setNewData(Matisse.obtainResult(data));
+            if (data != null)
+                mAdapter.setNewData(Matisse.obtainResult(data));
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data)));
         }
     }
 
-    @OnClick(R2.id.tv_select_time)
-    void selectTime(){
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, DatePickerDialog.THEME_DEVICE_DEFAULT_LIGHT,new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                selectedDate = year + "/" + (month + 1) + "/" + dayOfMonth;
-                mTvSelectedTime.setText(selectedDate);
-            }
-        },year,month,day);
-        datePickerDialog.show();
-    }
-
     @OnClick(R2.id.iv_select_img)
-    void selectImage(){
+    void selectImage() {
         AndPermission.with(this)
                 .runtime()
                 .permission(Permission.Group.CAMERA)
                 .onGranted(new Action<List<String>>() {
                     @Override
                     public void onAction(List<String> data) {
-                        Matisse.from(PublishWishActivity.this)
+                        Matisse.from(ApplyForHelpActivity.this)
                                 .choose(MimeType.ofAll())
                                 .countable(true)
-                                .captureStrategy(new CaptureStrategy(true, "com.chs.wish.fileprovider","test"))
+                                .captureStrategy(new CaptureStrategy(true, "com.chs.wish.fileprovider", "test"))
                                 .capture(true)
                                 .maxSelectable(9)
                                 .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
@@ -122,9 +102,8 @@ public class PublishWishActivity extends BaseActivity {
                 .onDenied(new Action<List<String>>() {
                     @Override
                     public void onAction(List<String> data) {
-                showToast("拍照权限被禁止");
-            }
-        }).start();
+                        showToast("拍照权限被禁止");
+                    }
+                }).start();
     }
-
 }
