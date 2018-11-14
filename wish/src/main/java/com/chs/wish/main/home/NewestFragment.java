@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chs.core.app.Wish;
 import com.chs.core.base.BaseFragment;
 import com.chs.core.http.JsonCallback;
@@ -33,7 +34,8 @@ import butterknife.BindView;
  * 时间：2018-10-26 15:53
  * 描述：最新
  */
-public class NewestFragment extends BaseFragment implements OnItemClickListener,SwipeRefreshLayout.OnRefreshListener {
+public class NewestFragment extends BaseFragment implements OnItemClickListener
+        ,SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R2.id.rv_home)
     RecyclerView mRecyclerView = null;
     @BindView(R2.id.srl_index)
@@ -41,6 +43,8 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener,
     private HomeListAdapter mAdapter;
     private PagingBean BEAN = new PagingBean();
     private int mType;//0是左边 1是右边
+    private boolean isFirstLoad = false;
+    private boolean isRefresh = true;
     public static NewestFragment newInstance(int from){
         NewestFragment newestFragment = new NewestFragment();
         Bundle bundle = new Bundle();
@@ -71,6 +75,7 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener,
         mRecyclerView.setLayoutManager(manager);
         mAdapter = new HomeListAdapter(R.layout.item_home_list,new ArrayList<WishList.DataBean>());
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnLoadMoreListener(this,mRecyclerView);
         if(mType == 0)
         addHeadView();
     }
@@ -83,16 +88,18 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener,
         );
         mRefreshLayout.setProgressViewOffset(true, 120, 300);
         mRefreshLayout.setRefreshing(true);
+        mRefreshLayout.setOnRefreshListener(this);
     }
 
     private void initData() {
-        if(mType == 0){
+        if(mType == 0&&!isFirstLoad){
             OkGo.<Banner>get(Api.BANNER)
                     .tag(this)
                     .params("adver_id","1")
                     .execute(new JsonCallback<Banner>(Banner.class) {
                         @Override
                         public void onSuccess(Response<Banner> response) {
+                            isFirstLoad = true;
                             List<Banner.BannerData> bannerData = response.body().getData();
                             ArrayList<String> banners = new ArrayList<>();
                             for (Banner.BannerData data : bannerData) {
@@ -112,7 +119,7 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener,
                         wishList.addAll(response.body().getData());
                         wishList.addAll(response.body().getData());
                         wishList.addAll(response.body().getData());
-                        setData(true,wishList);
+                        setData(wishList);
                     }
                 });
     }
@@ -126,7 +133,7 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener,
         });
         mAdapter.addHeaderView(headView);
     }
-    private void setData(boolean isRefresh, List data) {
+    private void setData(List data) {
         mRefreshLayout.setRefreshing(false);
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
@@ -151,6 +158,14 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener,
 
     @Override
     public void onRefresh() {
+        isRefresh = true;
+       initData();
+    }
 
+    @Override
+    public void onLoadMoreRequested() {
+        isRefresh = false;
+        BEAN.addIndex();
+        initData();
     }
 }
