@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@drawable/comment_bg"
+    android:paddingTop="@dimen/dp10"
+    android:paddingBottom="@dimen/dp10"
+    >
+<android.support.v7.widget.AppCompatTextView
+    android:id="@+id/tv_like"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp8"
+    android:layout_marginEnd="@dimen/dp8"
+    android:drawableStart="@mipmap/main_home_list_praise"
+    android:drawablePadding="@dimen/dp5"
+    android:textColor="@color/white"
+    android:text="@string/main_list_like"
+    />
+    <View
+        android:layout_width="@dimen/dp1"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp3"
+        android:layout_marginBottom="@dimen/dp3"
+        android:background="@color/white"
+        />
+<android.support.v7.widget.AppCompatTextView
+    android:id="@+id/tv_comment"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp10"
+    android:layout_marginEnd="@dimen/dp10"
+    android:drawableStart="@mipmap/main_home_list_comment_small"
+    android:drawablePadding="@dimen/dp5"
+    android:textColor="@color/white"
+    android:text="@string/main_list_comment"
+    />
+</android.support.v7.widget.LinearLayoutCompat>

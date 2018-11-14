@@ -29,7 +29,7 @@ public class HomeFragment extends BaseFragment {
     @BindView(R2.id.vp_content)
     ViewPager mViewPager;
 
-    private List<BaseFragment> mFragments = new ArrayList<>();
+    private List<NewestFragment> mFragments = new ArrayList<>();
     private String[] mTitles = new String[]{"最新","最热"};
 
     public static HomeFragment newInstance(){
@@ -43,8 +43,8 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        mFragments.add(NewestFragment.newInstance());
-        mFragments.add(HottestFragment.newInstance());
+        mFragments.add(NewestFragment.newInstance(0));
+        mFragments.add(NewestFragment.newInstance(1));
         NewsPagerAdapter pagerAdapter = new NewsPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

@@ -1,6 +1,5 @@
 package com.chs.wish.main.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chs.core.app.Wish;
 import com.chs.core.base.BaseFragment;
 import com.chs.core.http.JsonCallback;
@@ -19,7 +17,6 @@ import com.chs.wish.Api;
 import com.chs.wish.R;
 import com.chs.wish.R2;
 import com.chs.wish.main.banner.BannerCreator;
-import com.chs.wish.main.detail.WishDetailActivity;
 import com.chs.wish.main.home.entity.Banner;
 import com.chs.wish.main.home.entity.WishList;
 import com.chs.wish.main.home.ui.HomeListAdapter;
@@ -36,18 +33,21 @@ import butterknife.BindView;
  * 时间：2018-10-26 15:53
  * 描述：最新
  */
-public class NewestFragment extends BaseFragment implements OnItemClickListener {
+public class NewestFragment extends BaseFragment implements OnItemClickListener,SwipeRefreshLayout.OnRefreshListener {
     @BindView(R2.id.rv_home)
     RecyclerView mRecyclerView = null;
     @BindView(R2.id.srl_index)
     SwipeRefreshLayout mRefreshLayout = null;
     private HomeListAdapter mAdapter;
     private PagingBean BEAN = new PagingBean();
-
-    public static NewestFragment newInstance(){
-        return new NewestFragment();
+    private int mType;//0是左边 1是右边
+    public static NewestFragment newInstance(int from){
+        NewestFragment newestFragment = new NewestFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("type",from);
+        newestFragment.setArguments(bundle);
+        return newestFragment;
     }
-
     @Override
     protected Object setLayoutId() {
         return R.layout.main_fragment_newest;
@@ -55,29 +55,23 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener 
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
+        mType = getArguments().getInt("type");
         initRefreshLayout();
         initRecyclerView();
-        initData();
     }
 
     @Override
     protected void onFirstVisible() {
         super.onFirstVisible();
+        initData();
     }
 
     private void initRecyclerView() {
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
-//        mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getActivityContext(), R.color.line_bg), 10));
         mAdapter = new HomeListAdapter(R.layout.item_home_list,new ArrayList<WishList.DataBean>());
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnItemTouchListener(new com.chad.library.adapter.base.listener.OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getActivityContext(),WishDetailActivity.class);
-                startActivity(intent);
-            }
-        });
+        if(mType == 0)
         addHeadView();
     }
 
@@ -92,27 +86,32 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener 
     }
 
     private void initData() {
-        OkGo.<Banner>get(Api.BANNER)
-                .tag(this)
-                .params("adver_id","1")
-                .execute(new JsonCallback<Banner>(Banner.class) {
-                    @Override
-                    public void onSuccess(Response<Banner> response) {
-                        List<Banner.BannerData> bannerData = response.body().getData();
-                        ArrayList<String> banners = new ArrayList<>();
-                        for (Banner.BannerData data : bannerData) {
-                            banners.add(data.getPic());
+        if(mType == 0){
+            OkGo.<Banner>get(Api.BANNER)
+                    .tag(this)
+                    .params("adver_id","1")
+                    .execute(new JsonCallback<Banner>(Banner.class) {
+                        @Override
+                        public void onSuccess(Response<Banner> response) {
+                            List<Banner.BannerData> bannerData = response.body().getData();
+                            ArrayList<String> banners = new ArrayList<>();
+                            for (Banner.BannerData data : bannerData) {
+                                banners.add(data.getPic());
+                            }
+                            final ConvenientBanner<String> convenientBanner = mAdapter.getHeaderLayout().findViewById(R.id.banner_recycler_item);
+                            BannerCreator.setDefault(convenientBanner, banners, NewestFragment.this);
                         }
-                        final ConvenientBanner<String> convenientBanner = mAdapter.getHeaderLayout().findViewById(R.id.banner_recycler_item);
-                        BannerCreator.setDefault(convenientBanner, banners, NewestFragment.this);
-                    }
-                });
+                    });
+        }
         OkGo.<WishList>get(Api.WISH_LISTS)
                 .tag(this)
                 .execute(new JsonCallback<WishList>(WishList.class) {
                     @Override
                     public void onSuccess(Response<WishList> response) {
                         List<WishList.DataBean> wishList = response.body().getData();
+                        wishList.addAll(response.body().getData());
+                        wishList.addAll(response.body().getData());
+                        wishList.addAll(response.body().getData());
                         setData(true,wishList);
                     }
                 });
@@ -148,5 +147,10 @@ public class NewestFragment extends BaseFragment implements OnItemClickListener 
     @Override
     public void onItemClick(int position) {
         Toast.makeText(Wish.getApplicationContext(),"点击了"+position,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRefresh() {
+
     }
 }

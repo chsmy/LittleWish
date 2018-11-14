@@ -46,4 +46,8 @@
     <string name="mine_msg_sex">性别</string>
     <string name="mine_msg_birthday">生日</string>
     <string name="mine_msg_binding_num">绑定账号</string>
+
+    //wish list
+    <string name="main_list_like">点赞</string>
+    <string name="main_list_comment">评论</string>
 </resources>
