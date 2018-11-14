@@ -102,13 +102,14 @@ public class HomeListAdapter extends BaseQuickAdapter<WishList.DataBean,BaseView
             tvLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mPopupWindow.dismiss();
                     Toast.makeText(mContext,"like",Toast.LENGTH_SHORT).show();
                 }
             });
             tvComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    mPopupWindow.dismiss();
                 }
             });
         }

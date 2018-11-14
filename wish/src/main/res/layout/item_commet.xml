@@ -24,7 +24,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp3"
         android:layout_marginBottom="@dimen/dp3"
-        android:background="@color/white"
+        android:background="@color/main_title_text_select"
         />
 <android.support.v7.widget.AppCompatTextView
     android:id="@+id/tv_comment"
