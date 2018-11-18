@@ -40,7 +40,7 @@ public class WishDetailActivity extends BaseActivity {
     AppCompatTextView mTvRight;
     @BindView(R2.id.iv_music)
     AppCompatImageView mIvMusic;
-    final MediaPlayer mMediaPlayer = new MediaPlayer();
+    private static MediaPlayer mMediaPlayer = null;
     @Override
     protected Object setContentLayout() {
         return R.layout.activity_detail_main;
@@ -51,6 +51,9 @@ public class WishDetailActivity extends BaseActivity {
         mTvLeft.setBackgroundResource(R.mipmap.top_bar_back);
         mTvTitle.setText(R.string.wish_list_detail_title);
         mTvRight.setBackgroundResource(R.mipmap.top_bar_modifier);
+        if(mMediaPlayer == null){
+            mMediaPlayer = new MediaPlayer();
+        }
         initData();
     }
 
@@ -61,21 +64,25 @@ public class WishDetailActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<MusicEntity> response) {
                         String url = response.body().getData().get(0).getMusic_url();
-                        try {
-                            mMediaPlayer.setDataSource(url);
-                            //3 准备播放
-                            mMediaPlayer.prepareAsync();
-                            //3.1 设置一个准备完成的监听
-                            mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                @Override
-                                public void onPrepared(MediaPlayer mp) {
-                                    // 4 开始播放
-                                    mMediaPlayer.start();
-                                }
-                            });
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        if(isAPPBroughtToBackground(WishDetailActivity.this)){
+                            try {
+                                mMediaPlayer.reset();
+                                mMediaPlayer.setDataSource(url);
+                                //3 准备播放
+                                mMediaPlayer.prepareAsync();
+                                //3.1 设置一个准备完成的监听
+                                mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                    @Override
+                                    public void onPrepared(MediaPlayer mp) {
+                                        // 4 开始播放
+                                        mMediaPlayer.start();
+                                    }
+                                });
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
+
                     }
                 });
     }
@@ -96,8 +103,10 @@ public class WishDetailActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
+        OkGo.getInstance().cancelTag(this);
         mMediaPlayer.stop();
     }
+
 }
