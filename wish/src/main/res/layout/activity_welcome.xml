@@ -3,8 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/loading"
+    android:background="@mipmap/loading_001"
     >
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_launcher_timer"
         android:layout_width="70dp"

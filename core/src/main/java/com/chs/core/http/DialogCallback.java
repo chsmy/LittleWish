@@ -70,6 +70,6 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
     @Override
     public void onError(Response<T> response) {
         super.onError(response);
-        Toast.makeText(mContext,mContext.getString(R.string.connect_net_failed),Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext,mContext.getString(R.string.connect_net_failed,response.message()),Toast.LENGTH_LONG).show();
     }
 }

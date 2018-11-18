@@ -16,10 +16,18 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="帮我找一个失散多年的好朋友"
-           android:layout_gravity="center_vertical"
-           android:layout_centerInParent="true"
+           android:layout_marginTop="@dimen/dp10"
+           android:layout_centerHorizontal="true"
            android:textSize="@dimen/sp_16"
            android:textColor="@color/black"
+           />
+       <android.support.v7.widget.AppCompatImageView
+           android:id="@+id/iv_music"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentEnd="true"
+           android:layout_marginEnd="@dimen/dp10"
+           android:background="@mipmap/detail_play_music"
            />
    </RelativeLayout>
 <RelativeLayout

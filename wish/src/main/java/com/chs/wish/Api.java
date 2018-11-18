@@ -14,6 +14,7 @@ public class Api {
     public static final String BANNER = MODULE_ADS +  "ads_pic"; //首页轮播
     public static final String WISH_LISTS = MODULE_WISH + "wish_lists"; //心愿列表
     public static final String WISH_INFO = MODULE_WISH + "wish_info";//心愿详情
+    public static final String WISH_INFO_MUSIC = MODULE_WISH + "music_lists";//详情中的音乐
 
     public static final String REGISTER = MODULE_USER + "add_user";//注册
     public static final String LOGIN = MODULE_USER + "login";//注册

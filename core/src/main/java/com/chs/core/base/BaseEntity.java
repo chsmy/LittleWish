@@ -11,6 +11,7 @@ public class BaseEntity {
     private String pages;
     private String page;
     private String returncode;
+    private String returnmsg;
 
     public String getTotal_number() {
         return total_number;
@@ -50,5 +51,13 @@ public class BaseEntity {
 
     public void setReturncode(String returncode) {
         this.returncode = returncode;
+    }
+
+    public String getReturnmsg() {
+        return returnmsg;
+    }
+
+    public void setReturnmsg(String returnmsg) {
+        this.returnmsg = returnmsg;
     }
 }
