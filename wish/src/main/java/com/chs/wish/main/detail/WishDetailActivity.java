@@ -69,7 +69,7 @@ public class WishDetailActivity extends BaseActivity {
                                 mMediaPlayer.reset();
                                 mMediaPlayer.setDataSource(url);
                                 //3 准备播放
-                                mMediaPlayer.prepareAsync();
+                                mMediaPlayer.prepare();
                                 //3.1 设置一个准备完成的监听
                                 mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                                     @Override
@@ -100,6 +100,14 @@ public class WishDetailActivity extends BaseActivity {
           mMediaPlayer.start();
           mIvMusic.setBackgroundResource(R.mipmap.detail_play_music);
       }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(mMediaPlayer!=null){
+            mMediaPlayer.start();
+        }
     }
 
     @Override
