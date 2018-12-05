@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 import com.chs.core.app.Wish;
 
 /**
- * Created by 傅令杰 on 2017/4/22
+ * Created by
  */
 
 public final class WishPreference {
