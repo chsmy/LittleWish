@@ -93,6 +93,7 @@ public class MineFragment extends BaseFragment {
 
     @OnClick(R2.id.ll_my_message)
     void showMyMessage(){
-        startActivity(MyMessageActivity.class);
+//        startActivity(MyMessageActivity.class);
+        startActivity(MessageActivity.class);
     }
 }
