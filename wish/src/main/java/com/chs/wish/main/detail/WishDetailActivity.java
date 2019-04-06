@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatTextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.chs.core.base.BaseActivity;
+import com.chs.core.http.DialogCallback;
 import com.chs.core.http.JsonCallback;
 import com.chs.wish.Api;
 import com.chs.wish.R;
@@ -38,6 +39,8 @@ public class WishDetailActivity extends BaseActivity {
     AppCompatTextView mTvTitle;
     @BindView(R2.id.tv_right)
     AppCompatTextView mTvRight;
+    @BindView(R2.id.tv_wish_title)
+    AppCompatTextView mTvWishTitle;
     @BindView(R2.id.iv_music)
     AppCompatImageView mIvMusic;
     private static MediaPlayer mMediaPlayer = null;
@@ -58,6 +61,17 @@ public class WishDetailActivity extends BaseActivity {
     }
 
     private void initData() {
+
+        OkGo.<WishInfo>get(Api.WISH_INFO).tag(this)
+                .params("id","1")
+                .execute(new DialogCallback<WishInfo>(WishInfo.class,this) {
+                    @Override
+                    public void onSuccess(Response<WishInfo> response) {
+                        Data data = response.body().getData().get(0);
+                        mTvWishTitle.setText(data.getTitle());
+                    }
+                });
+
         OkGo.<MusicEntity>get(Api.WISH_INFO_MUSIC)
                 .tag(this)
                 .execute(new JsonCallback<MusicEntity>(MusicEntity.class) {

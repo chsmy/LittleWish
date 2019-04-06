@@ -9,13 +9,20 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.chs.core.base.BaseActivity;
+import com.chs.core.base.BaseEntity;
+import com.chs.core.http.DialogCallback;
+import com.chs.wish.Api;
 import com.chs.wish.R;
 import com.chs.wish.R2;
 import com.chs.wish.main.publish.ui.PublishImgAdapter;
 import com.chs.wish.ui.GifSizeFilter;
 import com.chs.wish.ui.Glide4Engine;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+import com.orhanobut.logger.Logger;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
@@ -44,6 +51,8 @@ public class ApplyForHelpActivity extends BaseActivity {
     AppCompatTextView mTvRight;
     @BindView((R2.id.rv_pic))
     RecyclerView mRvPic;
+    @BindView(R2.id.et_content)
+    EditText mEtContent;
     private PublishImgAdapter mAdapter = null;
 
     @Override
@@ -75,6 +84,21 @@ public class ApplyForHelpActivity extends BaseActivity {
                 mAdapter.setNewData(Matisse.obtainResult(data));
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data)));
         }
+    }
+
+    @OnClick(R2.id.tv_right)
+    void publish(){
+        String content = mEtContent.getText().toString();
+        OkGo.<BaseEntity>post(Api.WISH_APPLY).tag(this)
+                .params("wish_id","1")
+                .params("user_id","1")
+                .params("content",content)
+                .execute(new DialogCallback<BaseEntity>(BaseEntity.class,this) {
+                    @Override
+                    public void onSuccess(Response<BaseEntity> response) {
+                        Logger.d(response.body().getReturncode());
+                    }
+                });
     }
 
     @OnClick(R2.id.iv_select_img)
