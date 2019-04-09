@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.DatePicker;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.chs.core.Constant;
 import com.chs.core.base.BaseActivity;
 import com.chs.core.http.DialogCallback;
@@ -21,6 +22,7 @@ import com.chs.wish.Api;
 import com.chs.wish.R;
 import com.chs.wish.R2;
 import com.chs.wish.main.publish.entity.ImageItem;
+import com.chs.wish.main.publish.entity.UpLoadFile;
 import com.chs.wish.main.publish.ui.PublishImgAdapter;
 import com.chs.wish.ui.GifSizeFilter;
 import com.chs.wish.ui.Glide4Engine;
@@ -66,6 +68,7 @@ public class PublishWishActivity extends BaseActivity {
     private PublishImgAdapter mAdapter = null;
 
     protected ArrayList<ImageItem> mImgData = new ArrayList<>();
+    private String fileIds = "";
 
     @Override
     protected Object setContentLayout() {
@@ -159,7 +162,6 @@ public class PublishWishActivity extends BaseActivity {
     private void upLoadFile(){
         ArrayList<File> files = new ArrayList<>();
         ArrayList<ImageItem> images = new ArrayList<>(mImgData);
-        images.remove(images.size()-1);
         for (ImageItem imageItem: images) {
             if(!imageItem.isVideo()){
                 Bitmap bitmap = BitCompressUtil.getSmallBitmap(imageItem.getPath());
@@ -174,38 +176,35 @@ public class PublishWishActivity extends BaseActivity {
                 files.add(new File(imageItem.getPath()));
             }
         }
-        PostRequest<String> request = OkGo.<String>post(Api.WISH_UPLOAD)
+        PostRequest<UpLoadFile> request = OkGo.<UpLoadFile>post(Api.WISH_UPLOAD)
                 .tag(this);
-        request.params("user_id","1");
-        request.params("is_form","0");
-        request.params("is_file","1");
         for (int i = 0; i < files.size(); i++) {
-            request.params("my_files"+i,files.get(i));
+            request.params("file_imgs"+i,files.get(i));
         }
         request
-                .execute(new DialogCallback<String>(String.class,this) {
+                .execute(new DialogCallback<UpLoadFile>(UpLoadFile.class,this) {
                     @Override
-                    public void onStart(Request<String, ? extends Request> request) {
+                    public void onStart(Request<UpLoadFile, ? extends Request> request) {
                         super.onStart(request);
                         showToast("正在上传文件");
                     }
 
                     @Override
-                    public void onSuccess(Response<String> response) {
-                        String loadFile = response.body();
-//                        String resCode = loadFile.getReturncode();
-//                        if(resCode.equals("0")){
-//                            fileIds = loadFile.getFile_ids();
-//                            LogUtils.i(fileIds);
-////                            showToast("上传完成");
-////                            submit();
-//                        }else {
-//                            showToast("上传文件失败");
-//                        }
-                        Logger.i(loadFile);
+                    public void onSuccess(Response<UpLoadFile> response) {
+                        UpLoadFile loadFile = response.body();
+                        String resCode = loadFile.getReturncode();
+                        if(resCode.equals("0")){
+                            fileIds = loadFile.getFile_ids();
+                            LogUtils.i(fileIds);
+                            showToast("上传完成");
+//                            submit();
+                        }else {
+                            showToast("上传文件失败");
+                        }
+                        Logger.i(fileIds);
                     }
                     @Override
-                    public void onError(Response<String> response) {
+                    public void onError(Response<UpLoadFile> response) {
                         super.onError(response);
                         showToast("上传文件错误："+response.message());
                     }

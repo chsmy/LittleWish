@@ -44,6 +44,6 @@ public class Api {
     /**
      * 上传文件
      */
-    public static final String WISH_UPLOAD = MODULE_WISH + "add_file";
+    public static final String WISH_UPLOAD = MODULE_WISH + "save_img";
 
 }
