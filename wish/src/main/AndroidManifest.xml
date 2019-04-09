@@ -2,7 +2,17 @@
           package="com.chs.wish">
 <application>
 
-    <activity android:name=".launcher.WelcomeActivity"
+    <!--<activity android:name=".launcher.WelcomeActivity"-->
+        <!--android:theme="@style/LoadingSplash"-->
+        <!--&gt;-->
+        <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN"/>-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+        <!--</intent-filter>-->
+    <!--</activity>-->
+
+    <activity android:name=".main.home.HomeActivity"
         android:theme="@style/LoadingSplash"
         >
         <intent-filter>
@@ -14,7 +24,7 @@
 
     <activity android:name=".launcher.GuideActivity"/>
     <activity android:name=".user.LoginActivity"/>
-    <activity android:name=".main.home.HomeActivity"/>
+    <!--<activity android:name=".main.home.HomeActivity"/>-->
     <activity android:name=".user.RegisterActivity"/>
     <activity android:name=".main.detail.WishDetailActivity"/>
     <activity android:name=".main.publish.PublishWishActivity"

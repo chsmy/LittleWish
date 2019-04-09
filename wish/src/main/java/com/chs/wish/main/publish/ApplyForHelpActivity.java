@@ -2,7 +2,6 @@ package com.chs.wish.main.publish;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
@@ -17,12 +16,12 @@ import com.chs.core.http.DialogCallback;
 import com.chs.wish.Api;
 import com.chs.wish.R;
 import com.chs.wish.R2;
+import com.chs.wish.main.publish.entity.ImageItem;
 import com.chs.wish.main.publish.ui.PublishImgAdapter;
 import com.chs.wish.ui.GifSizeFilter;
 import com.chs.wish.ui.Glide4Engine;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
-import com.orhanobut.logger.Logger;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
@@ -54,7 +53,7 @@ public class ApplyForHelpActivity extends BaseActivity {
     @BindView(R2.id.et_content)
     EditText mEtContent;
     private PublishImgAdapter mAdapter = null;
-
+    protected ArrayList<ImageItem> mImgData = new ArrayList<>();
     @Override
     protected Object setContentLayout() {
         return R.layout.activity_apply_for_help;
@@ -72,7 +71,7 @@ public class ApplyForHelpActivity extends BaseActivity {
         final LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRvPic.setLayoutManager(manager);
-        mAdapter = new PublishImgAdapter(R.layout.item_show_img, new ArrayList<Uri>());
+        mAdapter = new PublishImgAdapter(R.layout.item_show_img,mImgData);
         mRvPic.setAdapter(mAdapter);
     }
 
@@ -81,7 +80,8 @@ public class ApplyForHelpActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PubConst.REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             if (data != null)
-                mAdapter.setNewData(Matisse.obtainResult(data));
+                mAdapter.notifyDataSetChanged();
+//                mAdapter.setNewData(Matisse.obtainResult(data));
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data)));
         }
     }
@@ -96,7 +96,11 @@ public class ApplyForHelpActivity extends BaseActivity {
                 .execute(new DialogCallback<BaseEntity>(BaseEntity.class,this) {
                     @Override
                     public void onSuccess(Response<BaseEntity> response) {
-                        Logger.d(response.body().getReturncode());
+                        String returncode = response.body().getReturncode();
+                        if(returncode.equals("0")){
+                           showToast("发布成功");
+                           finish();
+                        }
                     }
                 });
     }

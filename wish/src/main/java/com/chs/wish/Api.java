@@ -41,5 +41,9 @@ public class Api {
      * 申请助力
      */
     public static final String WISH_APPLY = MODULE_WISH + "wish_apply";
+    /**
+     * 上传文件
+     */
+    public static final String WISH_UPLOAD = MODULE_WISH + "add_file";
 
 }

@@ -1,6 +1,5 @@
 package com.chs.wish.main.publish.ui;
 
-import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
@@ -12,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chs.wish.R;
+import com.chs.wish.main.publish.entity.ImageItem;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * 时间：2018/11/10
  * 描述：
  */
-public class PublishImgAdapter extends BaseQuickAdapter<Uri,BaseViewHolder> {
+public class PublishImgAdapter extends BaseQuickAdapter<ImageItem,BaseViewHolder> {
 
     //设置图片加载策略
     private static final RequestOptions RECYCLER_OPTIONS =
@@ -29,16 +29,16 @@ public class PublishImgAdapter extends BaseQuickAdapter<Uri,BaseViewHolder> {
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .dontAnimate();
 
-    public PublishImgAdapter(int layoutResId, @Nullable List<Uri> data) {
+    public PublishImgAdapter(int layoutResId, @Nullable List<ImageItem> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Uri item) {
+    protected void convert(BaseViewHolder helper, ImageItem item) {
         AppCompatImageView imageView = helper.getView(R.id.iv_img);
         AppCompatImageView deleteView = helper.getView(R.id.delete_pic);
         Glide.with(mContext)
-                .load(item)
+                .load(item.getPicUri())
                 .apply(RECYCLER_OPTIONS)
                 .into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
